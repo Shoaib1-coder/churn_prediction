@@ -1,0 +1,159 @@
+
+
+<!DOCTYPE html> 
+<html>
+<head>
+    <title >Churn Prediction</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <!-- Loading Spinner -->
+<div id="loading-spinner" class="spinner-overlay" style="display: none;">
+    <div class="spinner"></div>
+    <p>Predicting... Please wait ⏳</p>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.querySelector("form");
+        const spinner = document.getElementById("loading-spinner");
+
+        if (form && spinner) {
+            form.addEventListener("submit", function () {
+                spinner.style.display = "flex";
+            });
+        }
+    });
+</script>
+
+    <div class="container">
+        <h2 class="page-title">📊 Churn Prediction</h2>
+         <!-- Usage Description -->
+        <p>
+            This application predicts whether a customer is likely to <strong>churn</strong> (leave) based on various factors such as age, gender, tenure, support calls, payment delays, subscription type, and more.
+        </p>
+
+        <!-- Example Inputs and Outputs -->
+        <div style="margin-bottom: 20px;">
+            <h4>🔍 Example Inputs & Outputs:</h4>
+            <ul>
+                <li>
+                    <strong>Example 1 (Churn):</strong><br>
+                    Age: 45, Gender: Female, Tenure: 2, Usage Frequency: 3.5, Support Calls: 4, Payment Delay: 10.0, Subscription: Basic, Contract: Monthly, Total Spend: 300.0, Days Since Last Interaction: 40<br>
+                    → <span style="color: red;"><strong>Prediction: Churn</strong></span>
+                </li>
+                <li>
+                    <strong>Example 2 (Not Churn):</strong><br>
+                    Age: 30, Gender: Male, Tenure: 24, Usage Frequency: 5.0, Support Calls: 0, Payment Delay: 0.0, Subscription: Premium, Contract: Yearly, Total Spend: 2400.0, Days Since Last Interaction: 2<br>
+                    → <span style="color: green;"><strong>Prediction: Not Churn</strong></span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Prediction Form -->
+        <form method="POST">
+            <input type="number" name="Age" placeholder="Age" required>
+            <select name="Gender" required>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+        </select>
+            <input type="number" name="Tenure" placeholder="Tenure" required>
+            <input type="number" step="any" name="UsageFrequency" placeholder="Usage Frequency" required>
+            <input type="number" name="SupportCalls" placeholder="Support Calls" required>
+            <input type="number" step="any" name="PaymentDelay" placeholder="Payment Delay" required>
+            
+            <select name="SubscriptionType" required>
+                <option value="Basic">Basic</option>
+                <option value="Standard">Standard</option>
+                <option value="Premium">Premium</option>
+            </select>
+            
+            <select name="ContractLength" required>
+                <option value="Monthly">Monthly</option>
+                <option value="Quarterly">Quarterly</option>
+                <option value="Annual">Annual</option>
+            </select>
+            
+            <input type="number" step="any" name="TotalSpend" placeholder="Total Spend" required>
+            <input type="number" name="DaysSinceLastInteraction" placeholder="Days Since Last Interaction" required>
+            <button type="submit">Predict</button>
+        </form>
+
+        <!-- Display Prediction -->
+        {% if prediction is not none %}
+    <h3>Prediction:
+        {% if prediction == 1 %}
+            <span style="color: red;">Churn</span>
+        {% elif prediction == 0 %}
+            <span style="color: green;">Not Churn</span>
+        {% else %}
+            {{ prediction }}  <!-- Show error message if present -->
+        {% endif %}
+    </h3>
+    {% if probability %}
+        <h4>Churn Probability: {{ probability }}%</h4>
+    {% endif %}
+    {% endif %}
+
+    
+     <!-- Top Description: What is Churn Prediction App -->
+     <div style="margin-bottom: 25px;">
+        <h3>📊 What Is a Churn Prediction App?</h3>
+        <p>
+            A <strong>Churn Prediction App</strong> is a machine learning-based tool that helps businesses predict which customers are likely to leave or cancel their service (called "churn") based on past behavior and customer data.
+        </p>
+        <p>
+            It is widely used in industries such as:
+            <ul>
+                <li>🏦 Telecom</li>
+                <li>📺 Streaming services (e.g., Netflix)</li>
+                <li>🛒 E-commerce & Subscription services</li>
+                <li>💼 SaaS (Software as a Service) platforms</li>
+                <li>🎮 Gaming apps</li>
+                <li>🏥 Health & insurance sectors</li>
+            </ul>
+        </p>
+        <!-- Add this inside the <body> tag, before the form -->
+       <div class="how-it-works">
+        <h3>🛠️ How This App Works</h3>
+        <p>This app uses a machine learning model (XGBoost) trained on historical customer data to predict whether a customer is likely to churn.</p>
+        <ol>
+        <li>You fill in the form with customer details (age, gender, tenure, support calls, etc.).</li>
+        <li>The app scales your input using the same preprocessing as the training dataset.</li>
+        <li>The scaled data is passed to the trained XGBoost model.</li>
+        <li>The model returns a prediction: <strong>Churn</strong> or <strong>Not Churn</strong>.</li>
+        <li>The result is displayed on the screen in color (Red for Churn, Green for Not Churn).</li>
+        </ol>
+        </div>
+
+
+        <h4>🔐 Real Business Benefits</h4>
+        <table style="width: 100%; border-collapse: collapse;">
+            <tr style="background-color: #f1f1f1;">
+                <th style="text-align: left; padding: 8px;">Benefit</th>
+                <th style="text-align: left; padding: 8px;">Explanation</th>
+            </tr>
+            <tr>
+                <td style="padding: 8px;">🎯 Targeted Retention</td>
+                <td style="padding: 8px;">Focus on high-risk customers instead of blanket campaigns</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px;">📉 Lower Cost</td>
+                <td style="padding: 8px;">Retaining existing users is cheaper than acquiring new ones</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px;">🧭 Data-Driven Action</td>
+                <td style="padding: 8px;">Take informed steps like reaching out, offering upgrades, etc.</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px;">📈 Better Forecasting</td>
+                <td style="padding: 8px;">Anticipate customer base changes, revenue fluctuations</td>
+            </tr>
+        </table>
+    </div>
+   </div>
+</body>
+
+<p class="footer-text">© 2025 Churn Prediction App. All rights reserved.</p>
+</html>
