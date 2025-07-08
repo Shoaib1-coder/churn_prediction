@@ -9,18 +9,18 @@ app = Flask(__name__)
 
 # Load model and scaler
 model = XGBClassifier()
-model.load_model("xgb_churn_model.json")
-scaler = joblib.load("scaler.pkl")
-best_threshold = joblib.load("best_threshold.pkl")
-contract_encoder = joblib.load("contractlength_encoder.pkl")
-gender_encoder = joblib.load("gender_encoder.pkl")
-subscription_encoder = joblib.load("subscriptiontype_encoder.pkl")
+model.load_model("models/xgb_churn_model.json")
+scaler = joblib.load("models/scaler.pkl")
+best_threshold = joblib.load("models/best_threshold.pkl")
+contract_encoder = joblib.load("label_encoder/contractlength_encoder.pkl")
+gender_encoder = joblib.load("label_encoder/gender_encoder.pkl")
+subscription_encoder = joblib.load("label_encoder/subscriptiontype_encoder.pkl")
 
 # Feature column names (must match training order)
 columns = [
     "Age", "Gender", "Tenure", "Usage Frequency", "Support Calls",
     "Payment Delay", "Subscription Type", "Contract Length",
-    "Total Spend", "Days Since Last Interaction"
+    "Total Spend", "Last Interaction"
 ]
 
 @app.route("/", methods=["GET", "POST"])
@@ -34,7 +34,7 @@ def index():
             gender = gender_encoder.transform([request.form["Gender"]])[0]
             tenure = float(request.form["Tenure"])
             usage_freq = float(request.form["UsageFrequency"])
-            support_calls = int(float(request.form["SupportCalls"]))  # fixes '3.0' issue
+            support_calls = int(float(request.form["SupportCalls"]))  
 
             payment_delay = float(request.form["PaymentDelay"])
             subscription = subscription_encoder.transform([request.form["SubscriptionType"]])[0]
