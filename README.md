@@ -2,11 +2,7 @@
 
 A web-based application to predict whether a customer will churn or not using a machine learning model trained in `churn.ipynb` and deployed using Flask (`app.py`) with a user-friendly HTML/CSS frontend.
 
-<<<<<<< HEAD:README .md
 
-
-=======
->>>>>>> 8b78ff67aefa0c6b4f4ee9db313d297df08f0a08:README.md
 
 
 ## 🎯 Objective
