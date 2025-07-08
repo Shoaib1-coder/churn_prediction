@@ -2,35 +2,7 @@
 
 A web-based application to predict whether a customer will churn or not using a machine learning model trained in `churn.ipynb` and deployed using Flask (`app.py`) with a user-friendly HTML/CSS frontend.
 
----
 
-## 📁 Project Structure
-
-churn_prediction_app/
-│
-├── label_encoder/ # for Encodeing
-│ ├── contractlength_encoder.pkl
-│ ├── gender_encoder.pkl
-│ └── subscriptiontype_encoder.pkl
-│
-├── churn.ipynb # Jupyter Notebook for training & evaluation
-├── app.py # Flask web app
-│
-├── templates/
-│ └── index.html # HTML form for input
-│
-├── static/
-│ └── style.css # CSS styling
-│
-├── models/
-│ ├── xgb_churn_model.json # Trained XGBoost model
-│ ├── scaler.pkl # StandardScaler for features
-│ └── best_threshold.pkl # Optimal classification threshold
-│
-├── requirements.txt # Python dependencies
-└── README.md # Project documentation
-
----
 
 ## 🎯 Objective
 
@@ -43,7 +15,7 @@ To predict whether a customer will churn based on:
 
 ---
 
-## 🧪 Model Training (chur.ipynb)
+## 🧪 Model Training (churn.ipynb)
 
 1. Data preprocessing
 2. SMOTE for class balancing
