@@ -30,11 +30,7 @@ churn_prediction_app/
 ├── requirements.txt # Python dependencies
 └── README.md # Project documentation
 
-
-
 ---
-
-
 
 ## 🎯 Objective
 
